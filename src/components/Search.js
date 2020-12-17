@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Search = () => {
   const [str, setStr] = useState('')
   const [movies, setMovies] = useState([])
+  const [totalPages, setTotalPages] = useState(null)
+  const [page, setPage] = useState(1)
 
   const search = e => {
-    e.preventDefault()
+    e && e.preventDefault()
 
-    fetch(`http://www.omdbapi.com/?apikey=d010db29&s=${str}`)
+    fetch(`http://www.omdbapi.com/?apikey=d010db29&s=${str}&page=${page}`)
       .then(response => response.json())
       .then(response => {
         const {
@@ -22,10 +24,13 @@ const Search = () => {
           return
         }
 
+        setTotalPages(Math.ceil(totalResults / 10))
         setMovies(results)
       })
       .catch(console.error)
   }
+
+  useEffect(search, [page])
 
   return (
     <div className="search">
@@ -44,11 +49,31 @@ const Search = () => {
         </fieldset>
       </form>
 
-      <ul className="results">
+      <ol className="results">
         {movies.map(movie => (
           <li key={movie.imdbID}>{movie.Title}</li>
         ))}
-      </ul>
+      </ol>
+
+      {movies.length ? (
+        <div className="pagination">
+          <button
+            className="prev-page"
+            disabled={page - 1 <= 0}
+            onClick={() => setPage(page - 1)}
+          >previous page</button>
+
+          <div className="page">
+            <span><strong>{page}</strong> of {totalPages}</span>
+          </div>
+
+          <button
+            className="next-page"
+            disabled={page + 1 > totalPages}
+            onClick={() => setPage(page + 1)}
+          >next page</button>
+        </div>
+      ) : null}
     </div>
   )
 }
