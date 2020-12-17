@@ -2,9 +2,10 @@ import { useContext } from 'react'
 import Pagination from './Pagination'
 import SearchForm from './SearchForm'
 import Context from './Context'
+import MovieList from './MovieList'
 
 const Search = () => {
-  const { movies, loading } = useContext(Context)
+  const { hasMovies, loading } = useContext(Context)
 
   return (
     <div className="search">
@@ -12,13 +13,9 @@ const Search = () => {
 
       {loading ? (<p>Loading...</p>) : null}
 
-      <ol className="results">
-        {movies.map((movie, index) => (
-          <li key={`movie#${index}`}>{movie.Title}</li>
-        ))}
-      </ol>
+      <MovieList />
 
-      {movies.length ? (
+      {hasMovies ? (
         <Pagination />
       ) : null}
     </div>

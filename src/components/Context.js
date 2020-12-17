@@ -66,6 +66,8 @@ export const ContextProvider = ({ children }) => {
         loading,
         setLoading,
 
+        hasMovies: !!movies.length,
+
         search
       }}
     >
