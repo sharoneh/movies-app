@@ -7,8 +7,11 @@ export const ContextProvider = ({ children }) => {
   const [movies, setMovies] = useState([])
   const [totalPages, setTotalPages] = useState(null)
   const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
 
   const search = str => {
+    setLoading(true)
+
     fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${str}&page=${page}`)
       .then(response => response.json())
       .then(response => {
@@ -24,10 +27,14 @@ export const ContextProvider = ({ children }) => {
           return
         }
 
+        setLoading(false)
         setTotalPages(Math.ceil(totalResults / 10))
         setMovies(results)
       })
-      .catch(console.error)
+      .catch(err => {
+        console.error(err)
+        setLoading(false)
+      })
   }
 
   // prevent effect from running at first render
@@ -55,6 +62,9 @@ export const ContextProvider = ({ children }) => {
 
         page,
         setPage,
+
+        loading,
+        setLoading,
 
         search
       }}

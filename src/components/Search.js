@@ -4,11 +4,13 @@ import SearchForm from './SearchForm'
 import Context from './Context'
 
 const Search = () => {
-  const { movies } = useContext(Context)
+  const { movies, loading } = useContext(Context)
 
   return (
     <div className="search">
       <SearchForm />
+
+      {loading ? (<p>Loading...</p>) : null}
 
       <ol className="results">
         {movies.map((movie, index) => (
