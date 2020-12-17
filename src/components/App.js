@@ -1,4 +1,5 @@
 import Search from './Search'
+import { ContextProvider } from './Context'
 
 function App() {
   return (
@@ -8,11 +9,14 @@ function App() {
       </header>
 
       <main>
-        <Search />
+        <ContextProvider>
+          <Search />
+        </ContextProvider>
       </main>
 
       <footer>
-        <p>© 2020 Movies App by Sharon Hasegawa</p>
+        <p>Movies App by Sharon Hasegawa</p>
+        <p>This app uses <a href="http://www.omdbapi.com">OMDb API</a>.</p>
       </footer>
     </div>
   );
