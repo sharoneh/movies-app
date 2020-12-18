@@ -3,7 +3,7 @@ import Pagination from './Pagination'
 import SearchForm from './SearchForm'
 import MovieList from './MovieList'
 
-const Search = ({ movies, loading, error }) => (
+const SearchPage = ({ movies, loading, error }) => (
   <div className="search">
     <SearchForm />
 
@@ -23,4 +23,4 @@ const mapStateToProps = state => {
   return { movies, loading, error }
 }
 
-export default connect(mapStateToProps)(Search)
+export default connect(mapStateToProps)(SearchPage)
