@@ -1,10 +1,7 @@
-import { useContext } from 'react';
-import Context from './Context';
+import { connect } from 'react-redux'
 
-const MovieList = () => {
-  const { movies, hasMovies } = useContext(Context)
-
-  return !hasMovies ? null : (
+const MovieList = ({ movies }) => {
+  return !movies ? null : (
     <table className="results" border={1}>
       <thead>
         <tr>
@@ -41,4 +38,9 @@ const MovieList = () => {
   );
 }
 
-export default MovieList;
+const mapStateToProps = state => {
+  const { movies } = state
+  return { movies }
+}
+
+export default connect(mapStateToProps)(MovieList)

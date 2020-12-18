@@ -1,13 +1,14 @@
-import { useContext } from 'react';
-import Context from './Context';
+import { useState } from 'react';
+import { connect } from 'react-redux'
+import { searchMovies } from '../redux/MoviesReducer';
 
-const SearchForm = () => {
-  const { str, setStr, search } = useContext(Context)
+const SearchForm = ({ page, searchMovies }) => {
+  const [str, setStr] = useState('')
 
   return (
     <form onSubmit={e => {
       e.preventDefault()
-      search(str)
+      searchMovies(str, page)
     }}>
       <fieldset>
         <label htmlFor="search">Search for movies:</label>
@@ -25,4 +26,9 @@ const SearchForm = () => {
   );
 }
 
-export default SearchForm;
+const mapStateToProps = state => {
+  const { page } = state
+  return { page }
+}
+
+export default connect(mapStateToProps, { searchMovies })(SearchForm)

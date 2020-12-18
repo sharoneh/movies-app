@@ -1,8 +1,9 @@
 // initial state
 const INITIAL_STATE = {
   movies: null,
-  totalPages: null,
+  searchStr: null,
   page: 1,
+  totalPages: null,
   loading: false
 }
 
@@ -13,11 +14,14 @@ const SET_PAGE = 'SET_PAGE'
 const SET_LOADING = 'SET_LOADING'
 
 // actions
-export const searchRequest = () => ({ type: SEARCH_REQUEST })
+export const searchRequest = searchStr => ({
+  type: SEARCH_REQUEST,
+  payload: searchStr
+})
 
-export const search = (str, page) => {
+export const searchMovies = (str, page) => {
   return dispatch => {
-    dispatch(searchRequest())
+    dispatch(searchRequest(str))
 
     fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${str}&page=${page}`)
       .then(response => response.json())
@@ -31,6 +35,7 @@ export const search = (str, page) => {
 
         if (Error || Response === 'False') {
           console.error(Error)
+          dispatch(setLoading(false))
           return
         }
 
@@ -45,6 +50,14 @@ export const search = (str, page) => {
         console.error(err)
         dispatch(setLoading(false))
       })
+  }
+}
+
+export const changePage = page => {
+  return (dispatch, getState) => {
+    const { searchStr } = getState()
+
+    dispatch(searchMovies(searchStr, page))
   }
 }
 
@@ -67,7 +80,8 @@ const MoviesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: true,
-        movies: null
+        movies: null,
+        searchStr: payload
       }
     case SET_SEARCH_RESULTS:
       return {

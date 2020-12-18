@@ -1,5 +1,4 @@
 import Search from './Search'
-import { ContextProvider } from './Context'
 
 function App() {
   return (
@@ -9,9 +8,7 @@ function App() {
       </header>
 
       <main>
-        <ContextProvider>
-          <Search />
-        </ContextProvider>
+        <Search />
       </main>
 
       <footer>
