@@ -2,8 +2,7 @@ import SearchPage from './SearchPage'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom'
 import MoviePage from './MoviePage'
 
@@ -12,23 +11,11 @@ function App() {
     <Router>
       <header>
         <h1>Movies App</h1>
-
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-
-            <li>
-              <Link to="/movie">Movie</Link>
-            </li>
-          </ul>
-        </nav>
       </header>
 
       <main>
         <Switch>
-          <Route path="/movie">
+          <Route path="/movie/:movieId">
             <MoviePage />
           </Route>
 

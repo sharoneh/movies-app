@@ -1,6 +1,7 @@
 // initial state
 const INITIAL_STATE = {
   movies: null,
+  movie: null,
   searchStr: null,
   page: 1,
   totalPages: null,
@@ -9,8 +10,10 @@ const INITIAL_STATE = {
 }
 
 // action types
-const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS'
 const SEARCH_REQUEST = 'SEARCH_REQUEST'
+const MOVIE_REQUEST = 'MOVIE_REQUEST'
+const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS'
+const SET_MOVIE = 'SET_MOVIE'
 const SET_LOADING = 'SET_LOADING'
 const SET_ERROR = 'SET_ERROR'
 
@@ -19,6 +22,8 @@ export const searchRequest = searchStr => ({
   type: SEARCH_REQUEST,
   payload: searchStr
 })
+
+export const movieRequest = () => ({ type: MOVIE_REQUEST })
 
 export const searchMovies = (str, page) => {
   return dispatch => {
@@ -54,6 +59,39 @@ export const searchMovies = (str, page) => {
   }
 }
 
+export const searchMovieById = id => {
+  return dispatch => {
+    dispatch(movieRequest())
+
+    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&i=${id}`)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response)
+
+        const {
+          Response,
+          Error: err,
+          ...movie
+        } = response
+
+        if (err || Response === 'False') {
+          dispatch(setError(err))
+          dispatch(setLoading(false))
+          return
+        }
+
+        dispatch({
+          type: SET_MOVIE,
+          payload: movie
+        })
+      })
+      .catch(err => {
+        dispatch(setError(err))
+        dispatch(setLoading(false))
+      })
+  }
+}
+
 export const changePage = page => {
   return (dispatch, getState) => {
     const { searchStr } = getState()
@@ -80,12 +118,26 @@ const MoviesReducer = (state = INITIAL_STATE, action) => {
         movies: null,
         searchStr: payload
       }
+    case MOVIE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        movies: null,
+        movie: null
+      }
     case SET_SEARCH_RESULTS:
       return {
         ...state,
         movies: payload.movies,
         totalPages: payload.totalPages,
         page: payload.page,
+        loading: false
+      }
+    case SET_MOVIE:
+      return {
+        ...state,
+        movie: payload,
         loading: false
       }
     case SET_LOADING:

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const MovieList = ({ movies }) => {
   return !movies ? null : (
@@ -14,7 +15,7 @@ const MovieList = ({ movies }) => {
 
       <tbody>
         {movies.map((movie, index) => {
-          const { Title, Poster, Type, Year } = movie
+          const { Title, Poster, Type, Year, imdbID } = movie
 
           return (
             <tr key={`movie#${index}`}>
@@ -27,8 +28,15 @@ const MovieList = ({ movies }) => {
                   />
                 ) : null}
               </td>
+
               <td>{Type}</td>
-              <td>{Title}</td>
+
+              <td>
+                <Link to={`/movie/${imdbID}`}>
+                  {Title}
+                </Link>
+              </td>
+
               <td>{Year}</td>
             </tr>
           )

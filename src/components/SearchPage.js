@@ -7,8 +7,13 @@ const SearchPage = ({ movies, loading, error }) => (
   <div className="search">
     <SearchForm />
 
-    {loading ? (<p>Loading...</p>) : null}
-    {error ? (<p style={{ color: 'red' }}>{error}</p>) : null}
+    {loading ? (
+      <p>Loading...</p>
+    ) : null}
+
+    {error ? (
+      <p style={{ color: 'red' }}>{error}</p>
+    ) : null}
 
     <MovieList />
 
