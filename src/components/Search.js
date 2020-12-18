@@ -3,11 +3,12 @@ import Pagination from './Pagination'
 import SearchForm from './SearchForm'
 import MovieList from './MovieList'
 
-const Search = ({ movies, loading }) => (
+const Search = ({ movies, loading, error }) => (
   <div className="search">
     <SearchForm />
 
     {loading ? (<p>Loading...</p>) : null}
+    {error ? (<p style={{ color: 'red' }}>{error}</p>) : null}
 
     <MovieList />
 
@@ -18,8 +19,8 @@ const Search = ({ movies, loading }) => (
 )
 
 const mapStateToProps = state => {
-  const { movies, loading } = state
-  return { movies, loading }
+  const { movies, loading, error } = state
+  return { movies, loading, error }
 }
 
 export default connect(mapStateToProps)(Search)

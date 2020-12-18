@@ -4,14 +4,15 @@ const INITIAL_STATE = {
   searchStr: null,
   page: 1,
   totalPages: null,
-  loading: false
+  loading: false,
+  error: null
 }
 
 // action types
 const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS'
 const SEARCH_REQUEST = 'SEARCH_REQUEST'
-const SET_PAGE = 'SET_PAGE'
 const SET_LOADING = 'SET_LOADING'
+const SET_ERROR = 'SET_ERROR'
 
 // actions
 export const searchRequest = searchStr => ({
@@ -28,13 +29,13 @@ export const searchMovies = (str, page) => {
       .then(response => {
         const {
           Response,
-          Error,
+          Error: err,
           Search: movies,
           totalResults
         } = response
 
-        if (Error || Response === 'False') {
-          console.error(Error)
+        if (err || Response === 'False') {
+          dispatch(setError(err))
           dispatch(setLoading(false))
           return
         }
@@ -47,7 +48,7 @@ export const searchMovies = (str, page) => {
         })
       })
       .catch(err => {
-        console.error(err)
+        dispatch(setError(err))
         dispatch(setLoading(false))
       })
   }
@@ -60,11 +61,6 @@ export const changePage = page => {
     dispatch(searchMovies(searchStr, page))
   }
 }
-
-export const setPage = page => ({
-  type: SET_PAGE,
-  payload: page
-})
 
 export const setLoading = loading => ({
   type: SET_LOADING,
@@ -80,6 +76,7 @@ const MoviesReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: true,
+        error: null,
         movies: null,
         searchStr: payload
       }
@@ -91,13 +88,18 @@ const MoviesReducer = (state = INITIAL_STATE, action) => {
         page: payload.page,
         loading: false
       }
-    case SET_PAGE:
-      return { ...state, page: payload }
     case SET_LOADING:
       return { ...state, loading: payload }
+    case SET_ERROR:
+      return { ...state, error: payload }
     default:
-      return state
+      return { ...state }
   }
 }
+
+export const setError = error => ({
+  type: SET_ERROR,
+  payload: error
+})
 
 export default MoviesReducer
