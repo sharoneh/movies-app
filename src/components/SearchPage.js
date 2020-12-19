@@ -5,21 +5,23 @@ import MovieList from './MovieList'
 
 const SearchPage = ({ movies, loading, error }) => (
   <div className="search">
+    <h2>Search for movies</h2>
+
     <SearchForm />
 
-    {loading ? (
+    {loading && (
       <p>Loading...</p>
-    ) : null}
+    )}
 
-    {error ? (
+    {error && (
       <p style={{ color: 'red' }}>{error}</p>
-    ) : null}
+    )}
 
     <MovieList />
 
-    {movies ? (
+    {movies && (
       <Pagination />
-    ) : null}
+    )}
   </div>
 )
 

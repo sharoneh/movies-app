@@ -1,3 +1,5 @@
+const baseUrl = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}`
+
 // initial state
 const INITIAL_STATE = {
   movies: null,
@@ -25,11 +27,11 @@ export const searchRequest = searchStr => ({
 
 export const movieRequest = () => ({ type: MOVIE_REQUEST })
 
-export const searchMovies = (str, page) => {
+export const searchMovies = (str, page, year) => {
   return dispatch => {
     dispatch(searchRequest(str))
 
-    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${str}&page=${page}`)
+    fetch(`${baseUrl}&s=${str}&page=${page}${year ? `&y=${year}` : ''}`)
       .then(response => response.json())
       .then(response => {
         const {
@@ -63,7 +65,7 @@ export const searchMovieById = id => {
   return dispatch => {
     dispatch(movieRequest())
 
-    fetch(`http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&i=${id}`)
+    fetch(`${baseUrl}&i=${id}&plot=full`)
       .then(response => response.json())
       .then(response => {
         console.log(response)

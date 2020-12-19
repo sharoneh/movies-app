@@ -12,15 +12,15 @@ const MoviePage = ({ loading, error, movie, searchMovieById }) => {
     <div className="movie-page">
       <h1>Movie Page</h1>
 
-      {loading ? (
+      {loading && (
         <p>Loading...</p>
-      ) : null}
+      )}
 
-      {error ? (
+      {error && (
         <p style={{ color: 'red' }}>{error}</p>
-      ) : null}
+      )}
 
-      {movie ? (
+      {movie && (
         <div className="movie-data">
           <img
             src={movie.Poster}
@@ -46,7 +46,7 @@ const MoviePage = ({ loading, error, movie, searchMovieById }) => {
             ))}
           </ul>
         </div>
-      ) : null}
+      )}
     </div>
   )
 }

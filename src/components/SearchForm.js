@@ -4,24 +4,31 @@ import { searchMovies } from '../redux/MoviesReducer';
 
 const SearchForm = ({ page, searchMovies }) => {
   const [str, setStr] = useState('')
+  const [year, setYear] = useState('')
 
   return (
     <form onSubmit={e => {
       e.preventDefault()
-      searchMovies(str, page)
+      searchMovies(str, page, year)
     }}>
-      <fieldset>
-        <label htmlFor="search">Search for movies:</label>
 
-        <input
-          type="text"
-          id="search"
-          value={str}
-          onChange={(e) => setStr(e.target.value)}
-        />
+      <input
+        type="text"
+        placeholder="title"
+        aria-label="Title"
+        value={str}
+        onChange={(e) => setStr(e.target.value)}
+      />
 
-        <button type="submit">Search</button>
-      </fieldset>
+      <input
+        type="number"
+        placeholder="year"
+        aria-label="Year"
+        value={year}
+        onChange={(e) => setYear(e.target.value)}
+      />
+
+      <button type="submit">Search</button>
     </form>
   );
 }
