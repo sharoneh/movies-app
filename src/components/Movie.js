@@ -14,10 +14,12 @@ const StyledLink = styled(Link)`
   .img-container {
     height: 100px;
     width: 70px;
+    margin-right: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    flex-shrink: 0;
     
     img {
       width: 100%;
@@ -65,6 +67,15 @@ const StyledLink = styled(Link)`
     &:after {
       opacity: 0;
       transition: ease .3s;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    border-radius: 0;
+
+    .img-container {
+      height: 75px;
+      width: 52px;
     }
   }
 `

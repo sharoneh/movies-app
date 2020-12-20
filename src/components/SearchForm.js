@@ -5,7 +5,7 @@ import { searchMovies } from '../redux/MoviesReducer';
 
 const Container = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, .6);
-  padding: 40px;
+  padding: 40px 40px 30px;
   border-radius: 10px;
   background-color: floralwhite;
   position: relative;
@@ -27,6 +27,8 @@ const Container = styled.div`
   form {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 
     * {
       outline-color: #151e8f;
@@ -36,6 +38,7 @@ const Container = styled.div`
       border: none;
       padding: 10px 12px;
       margin-right: 10px;
+      margin-bottom: 10px;
       border-radius: 5px;
       color: #444;
       flex-grow: 1;
@@ -44,15 +47,30 @@ const Container = styled.div`
       &.year {
         max-width: 80px;
 
-        /* hide arrows: Firefox */
+        // hide arrows
+        /* Firefox */
         -moz-appearance: textfield;
 
-        /* hide arrows: Chrome, Safari, Edge, Opera */
+        /* Chrome, Safari, Edge, Opera */
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
           -webkit-appearance: none;
           margin: 0;
         }
+      }
+
+      // change placeholder color
+      ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #aaa;
+        opacity: 1; /* Firefox */
+      }
+
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #aaa;
+      }
+
+      ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #aaa;
       }
     }
 
@@ -64,6 +82,36 @@ const Container = styled.div`
       font-weight: bold;
       color: white;
       text-transform: uppercase;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    padding: 20px;
+    top: 10px;
+    margin: 0 10px;
+
+    h2 {
+      font-size: 1em;
+    }
+
+    form {
+      input, button {
+        width: 100%;
+      }
+
+      input {
+        margin-bottom: 10px;
+        margin-right: 0;
+        font-size: .85em;
+
+        &.year {
+          max-width: none;
+        }
+      }
+
+      button {
+        font-size: .8em;
+      }
     }
   }
 `
@@ -91,17 +139,16 @@ const SearchForm = ({ page, searchMovies }) => {
         />
 
         <input
-          type="text"
-          maxLength={4}
+          type="number"
           placeholder="year"
           aria-label="Year"
           className="year"
           value={year}
           onChange={(e) => {
-            const isNum = /^\d+$/.test(e.target.value)
-            if (!isNum) return
+            const number = e.target.value
+            if (number.length > 4) return
 
-            setYear(e.target.value)
+            setYear(number)
           }}
         />
 

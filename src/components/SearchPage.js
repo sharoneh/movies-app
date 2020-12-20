@@ -5,39 +5,53 @@ import MovieList from './MovieList'
 import Pagination from './Pagination'
 
 const Container = styled.div`
-  position: relative;
-  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  &:before {
-    content: '';
-    display: block;
-    height: 20px;
-    background-color: #181724;
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 0;
-    z-index: 0;
+  .search-page {
+    position: relative;
+    padding: 20px;
+
+    &:before {
+      content: '';
+      display: block;
+      height: 20px;
+      background-color: #181724;
+      position: fixed;
+      width: 100%;
+      left: 0;
+      top: 0;
+      z-index: 1;
+    }
+
+    @media screen and (max-width: 576px) {
+      padding: 0;
+    }
   }
 `
 
 const SearchPage = ({ movies, loading, error }) => (
   <Container>
-    <SearchForm />
+    <div className="search-page">
+      <SearchForm />
 
-    {loading && (
-      <p>Loading...</p>
-    )}
+      {loading && (
+        <p>Loading...</p>
+      )}
 
-    {error && (
-      <p style={{ color: 'red' }}>{error}</p>
-    )}
+      {error && (
+        <p style={{ color: 'red' }}>{error}</p>
+      )}
 
-    <MovieList />
+      <MovieList />
 
-    {movies && (
-      <Pagination />
-    )}
+      {movies && (
+        <Pagination />
+      )}
+    </div>
   </Container>
 )
 
