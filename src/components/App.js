@@ -4,29 +4,41 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
+import styled from 'styled-components'
+
 import MoviePage from './MoviePage'
-import Header from './Header'
 import Footer from './Footer'
+import GlobalStyle from '../globalStyles'
+
+const Main = styled.main`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 function App() {
   return (
-    <Router>
-      <Header />
+    <>
+      <GlobalStyle />
 
-      <main>
-        <Switch>
-          <Route path="/movie/:movieId">
-            <MoviePage />
-          </Route>
+      <Router>
+        <Main>
+          <Switch>
+            <Route path="/movie/:movieId">
+              <MoviePage />
+            </Route>
 
-          <Route path="/">
-            <SearchPage />
-          </Route>
-        </Switch>
-      </main>
+            <Route path="/">
+              <SearchPage />
+            </Route>
+          </Switch>
+        </Main>
 
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </>
   )
 }
 

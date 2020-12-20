@@ -1,12 +1,28 @@
 import { connect } from 'react-redux'
-import Pagination from './Pagination'
+import styled from 'styled-components'
 import SearchForm from './SearchForm'
 import MovieList from './MovieList'
+import Pagination from './Pagination'
+
+const Container = styled.div`
+  position: relative;
+  padding: 20px;
+
+  &:before {
+    content: '';
+    display: block;
+    height: 20px;
+    background-color: #181724;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 0;
+  }
+`
 
 const SearchPage = ({ movies, loading, error }) => (
-  <div className="search">
-    <h2>Search for movies</h2>
-
+  <Container>
     <SearchForm />
 
     {loading && (
@@ -22,7 +38,7 @@ const SearchPage = ({ movies, loading, error }) => (
     {movies && (
       <Pagination />
     )}
-  </div>
+  </Container>
 )
 
 const mapStateToProps = state => {
