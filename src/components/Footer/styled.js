@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const StyledFooter = styled.footer`
+export const StyledFooter = styled.footer`
   position: fixed;
   bottom: 0;
   padding: 10px 20px;
@@ -20,13 +20,3 @@ const StyledFooter = styled.footer`
     }
   }
 `
-
-const Footer = () => {
-  return (
-    <StyledFooter>
-      <p>This app uses <a href="http://www.omdbapi.com">OMDb API</a>.</p>
-    </StyledFooter>
-  );
-}
-
-export default Footer;

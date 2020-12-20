@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { searchMovies } from '../redux/MoviesReducer';
 
 const Container = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, .6);
@@ -16,15 +13,15 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  h2 {
+  /* h2 {
     text-align: center;
     margin-top: 0;
     color: #151e8f;
     text-transform: uppercase;
     font-family: 'Zilla Slab', serif;
-  }
+  } */
 
-  form {
+  /* form {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -48,10 +45,8 @@ const Container = styled.div`
         max-width: 80px;
 
         // hide arrows
-        /* Firefox */
         -moz-appearance: textfield;
 
-        /* Chrome, Safari, Edge, Opera */
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
           -webkit-appearance: none;
@@ -60,16 +55,16 @@ const Container = styled.div`
       }
 
       // change placeholder color
-      ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      ::placeholder { 
         color: #aaa;
-        opacity: 1; /* Firefox */
+        opacity: 1; 
       }
 
-      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      :-ms-input-placeholder { 
         color: #aaa;
       }
 
-      ::-ms-input-placeholder { /* Microsoft Edge */
+      ::-ms-input-placeholder { 
         color: #aaa;
       }
     }
@@ -83,18 +78,18 @@ const Container = styled.div`
       color: white;
       text-transform: uppercase;
     }
-  }
+  } */
 
   @media screen and (max-width: 576px) {
     padding: 20px;
     top: 10px;
     margin: 0 10px;
 
-    h2 {
+    /* h2 {
       font-size: 1em;
-    }
+    } */
 
-    form {
+    /* form {
       input, button {
         width: 100%;
       }
@@ -112,55 +107,8 @@ const Container = styled.div`
       button {
         font-size: .8em;
       }
-    }
+    } */
   }
 `
 
-const SearchForm = ({ page, searchMovies }) => {
-  const [str, setStr] = useState('')
-  const [year, setYear] = useState('')
-
-  return (
-    <Container>
-      <h2>Search for movies, series and episodes</h2>
-
-      <form onSubmit={e => {
-        e.preventDefault()
-        searchMovies(str, page, year)
-      }}>
-
-        <input
-          type="text"
-          placeholder="title"
-          aria-label="Title"
-          className="title"
-          value={str}
-          onChange={(e) => setStr(e.target.value)}
-        />
-
-        <input
-          type="number"
-          placeholder="year"
-          aria-label="Year"
-          className="year"
-          value={year}
-          onChange={(e) => {
-            const number = e.target.value
-            if (number.length > 4) return
-
-            setYear(number)
-          }}
-        />
-
-        <button type="submit">Search</button>
-      </form>
-    </Container>
-  );
-}
-
-const mapStateToProps = state => {
-  const { page } = state
-  return { page }
-}
-
-export default connect(mapStateToProps, { searchMovies })(SearchForm)
+export default Container

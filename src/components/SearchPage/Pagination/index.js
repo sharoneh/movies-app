@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changePage } from '../redux/MoviesReducer'
+import { changePage } from '../../../redux/MoviesReducer'
 
 const Pagination = ({ page, totalPages, changePage }) => (
   <div className="pagination">
@@ -9,7 +9,7 @@ const Pagination = ({ page, totalPages, changePage }) => (
       onClick={() => changePage(page - 1)}
     >
       previous page
-      </button>
+    </button>
 
     <div className="page">
       <span><strong>{page}</strong> of {totalPages}</span>
@@ -21,7 +21,7 @@ const Pagination = ({ page, totalPages, changePage }) => (
       onClick={() => changePage(page + 1)}
     >
       next page
-      </button>
+    </button>
   </div>
 )
 

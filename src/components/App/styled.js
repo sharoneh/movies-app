@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     background: #181724;
@@ -18,4 +18,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-export default GlobalStyle
+export const StyledMain = styled.main`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+`

@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { searchMovieById } from '../redux/MoviesReducer'
+import { searchMovieById } from '../../redux/MoviesReducer'
 
 const MoviePage = ({ loading, error, movie, searchMovieById }) => {
   const { movieId } = useParams()
 
+  // eslint-disable-next-line
   useEffect(() => searchMovieById(movieId), [])
 
   return (

@@ -1,20 +1,14 @@
-import SearchPage from './SearchPage'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from 'react-router-dom'
-import styled from 'styled-components'
 
-import MoviePage from './MoviePage'
-import Footer from './Footer'
-import GlobalStyle from '../globalStyles'
+import { GlobalStyle, StyledMain } from './styled'
 
-const Main = styled.main`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-`
+import Footer from '../Footer'
+import SearchPage from '../SearchPage'
+import MoviePage from '../MoviePage'
 
 function App() {
   return (
@@ -22,7 +16,7 @@ function App() {
       <GlobalStyle />
 
       <Router>
-        <Main>
+        <StyledMain>
           <Switch>
             <Route path="/movie/:movieId">
               <MoviePage />
@@ -32,7 +26,7 @@ function App() {
               <SearchPage />
             </Route>
           </Switch>
-        </Main>
+        </StyledMain>
 
         <Footer />
       </Router>
