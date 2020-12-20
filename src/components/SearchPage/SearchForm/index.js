@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 
 import {
   Container,
-  Title,
   Form,
   Input,
   Button,
 } from './styled'
+import { SearchPageTitle } from '../../common/Title';
 
 import { searchMovies } from '../../../redux/MoviesReducer';
 
@@ -17,7 +17,7 @@ const SearchForm = ({ page, searchMovies }) => {
 
   return (
     <Container>
-      <Title>Search for movies, series and episodes</Title>
+      <SearchPageTitle>Search for movies, series and episodes</SearchPageTitle>
 
       <Form onSubmit={e => {
         e.preventDefault()

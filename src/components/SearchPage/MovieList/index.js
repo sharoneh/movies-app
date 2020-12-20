@@ -3,7 +3,7 @@ import Movie from './Movie';
 import { Container } from './styled';
 
 const MovieList = ({ movies }) => {
-  return !movies ? null : (
+  return movies && (
     <Container>
       {movies.map((movie, index) => (
         <Movie
@@ -12,7 +12,7 @@ const MovieList = ({ movies }) => {
         />
       ))}
     </Container>
-  );
+  )
 }
 
 const mapStateToProps = state => {
