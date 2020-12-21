@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { breakpoints } from '../../../../common/variables'
 
 const StyledLink = styled(Link)`
   display: flex;
@@ -38,7 +39,7 @@ const StyledLink = styled(Link)`
     }
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: ${breakpoints[1]}) {
     border-radius: 0;
   }
 `

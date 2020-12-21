@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { blue, lightGrey, orange, floralWhite, breakpoints } from '../common/variables'
 
 export const Header = styled.header`
-  background-color: floralwhite;
+  background-color: ${floralWhite};
   box-shadow: 0 0 10px rgba(0, 0, 0, .6);
   padding: 1em;
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   z-index: 2;
@@ -16,9 +17,13 @@ export const Header = styled.header`
     text-transform: none;
     text-align: center;
     margin: 0;
-    color: #c53131;
+    color: ${orange};
+  }
 
-    @media screen and (max-width: 576px) {
+  @media screen and (max-width: ${breakpoints[1]}) {
+    padding: .8em;
+
+    h3 {
       font-size: 1em;
     }
   }
@@ -27,33 +32,48 @@ export const Header = styled.header`
 export const Container = styled.div`
   padding: 0 20px 0;
   max-width: 900px;
-  margin: 85px auto 0;
+  margin: 0 auto;
+  width: 100%;
+
+  ${props => props.notFound ? `
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      outline-color: white;
+      text-decoration: none;
+      
+      button {
+        color: white;
+      }
+    }
+  `: ''}
 
   * {
-    color: #999;
+    color: ${lightGrey};
   }
 
   .movie-content {
     display: flex;
     justify-content: center;
-    
-    .side-container img,
-    .movie-data {
-      max-height: calc(100vh - 165px);
-    }
 
     .side-container img {
       position: sticky;
-      top: 120px;
+      top: 105px;
       z-index: 1;
       min-height: 235px;
+      max-height: 65vh;
     }
 
     .movie-data {
-      padding: 40px 20px 0;
+      padding: 20px 0 0 20px;
       display: flex;
       flex-direction: column;
       overflow: auto;
+      flex-grow: 1;
 
       p.plot {
         margin: 0;
@@ -70,17 +90,18 @@ export const Container = styled.div`
         h3 {
           font-family: 'Zilla Slab', serif;
           text-transform: uppercase;
-          background-color: floralwhite;
-          color: #151e8f;
+          background-color: ${floralWhite};
+          color: ${blue};
           padding: 5px 15px;
           margin: 0;
+          border-radius: 5px;
         }
       }
     }
   }
 
-  @media screen and (max-width: 768px) {
-    margin-top: 70px;
+  @media screen and (max-width: ${breakpoints[0]}) {
+    margin-top: 20px;
 
     p, li {
       font-size: .9em;
@@ -96,6 +117,7 @@ export const Container = styled.div`
 
         img {
           position: static;
+          max-width: 100%;
         }
       }
 

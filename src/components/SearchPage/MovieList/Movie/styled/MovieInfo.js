@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../../../common/variables'
 
 const MovieInfo = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const MovieInfo = styled.div`
     margin: 0;
     color: lightgrey;
 
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: ${breakpoints[1]}) {
       font-size: .9em;
     }
   }

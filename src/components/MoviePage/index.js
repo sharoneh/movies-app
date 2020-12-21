@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { Container, Header } from './styled'
-import { MoviePageTitle } from '../common/Title'
+import { MoviePageTitle, ErrorTitle } from '../common/Title'
 
 import { searchMovieById } from '../../redux/MoviesReducer'
+import Button from '../common/Button'
 
 const Item = ({ label, value }) => value && value !== 'N/A' ? (
   <li><b>{label}: </b>{value}</li>
@@ -18,15 +19,22 @@ const MoviePage = ({ loading, error, movie, searchMovieById }) => {
   useEffect(() => searchMovieById(movieId), [])
 
   if (!movie) return (
-    <div>
-      { loading && (
-        <p>Loading...</p>
+    <Container notFound>
+      {loading && (
+        <MoviePageTitle>Loading...</MoviePageTitle>
       )}
 
       {error && (
-        <p style={{ color: 'red' }}>{error}</p>
+        <>
+          <ErrorTitle secondary>404</ErrorTitle>
+          <ErrorTitle>Not found!</ErrorTitle>
+
+          <Link to="/">
+            <Button tabIndex="-1">search page</Button>
+          </Link>
+        </>
       )}
-    </div>
+    </Container>
   )
 
   const {

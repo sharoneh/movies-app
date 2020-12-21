@@ -1,13 +1,15 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import { darkBlue } from '../common/variables'
 
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    background: #181724;
+    background: ${darkBlue};
     
     * {
       font-family: 'Work Sans', sans-serif;
       -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
     }
 
     #root {

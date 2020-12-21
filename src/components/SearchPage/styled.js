@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints, darkBlue } from '../common/variables'
 
 export const Container = styled.div`
   flex-grow: 1;
@@ -15,7 +16,7 @@ export const Container = styled.div`
       content: '';
       display: block;
       height: 20px;
-      background-color: #181724;
+      background-color: ${darkBlue};
       position: fixed;
       width: 100%;
       left: 0;
@@ -23,7 +24,7 @@ export const Container = styled.div`
       z-index: 1;
     }
 
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: ${breakpoints[1]}) {
       padding: 0;
     }
   }

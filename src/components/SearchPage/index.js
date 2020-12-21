@@ -11,14 +11,6 @@ const SearchPage = ({ movies, loading, error }) => (
     <div className="search-page">
       <SearchForm />
 
-      {loading && (
-        <p>Loading...</p>
-      )}
-
-      {error && (
-        <p style={{ color: 'red' }}>{error}</p>
-      )}
-
       <MovieList />
 
       {movies && (

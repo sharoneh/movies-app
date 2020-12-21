@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../../common/variables'
 
 const Input = styled.input`
   border: none;
@@ -38,7 +39,7 @@ const Input = styled.input`
     color: #aaa;
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: ${breakpoints[1]}) {
     width: 100%;
     font-size: .85em;
     margin-bottom: 10px;

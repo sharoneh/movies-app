@@ -5,9 +5,9 @@ import {
   Container,
   Form,
   Input,
-  Button,
 } from './styled'
 import { SearchPageTitle } from '../../common/Title';
+import Button from '../../common/Button';
 
 import { searchMovies } from '../../../redux/MoviesReducer';
 
@@ -47,7 +47,10 @@ const SearchForm = ({ page, searchMovies }) => {
           }}
         />
 
-        <Button type="submit">Search</Button>
+        <Button
+          type="submit"
+          disabled={!str}
+        >Search</Button>
       </Form>
     </Container>
   );

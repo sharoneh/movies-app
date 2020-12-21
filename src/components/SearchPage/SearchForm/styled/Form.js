@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { blue } from '../../../common/variables'
 
 const Form = styled.form`
   width: 100%;
@@ -7,7 +8,7 @@ const Form = styled.form`
   justify-content: flex-end;
 
   * {
-    outline-color: #151e8f;
+    outline-color: ${blue};
   }
 `
 

@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { breakpoints, floralWhite } from '../../../common/variables'
 
 const Container = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, .6);
   padding: 40px 40px 30px;
   border-radius: 10px;
-  background-color: floralwhite;
+  background-color: ${floralWhite};
   position: relative;
   z-index: 2;
   position: sticky;
@@ -13,7 +14,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: ${breakpoints[1]}) {
     padding: 20px;
     top: 10px;
     margin: 0 10px;

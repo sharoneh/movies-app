@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../../../common/variables'
 
 const ImgContainer = styled.div`
   height: 100px;
@@ -14,7 +15,7 @@ const ImgContainer = styled.div`
     width: 100%;
   }
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: ${breakpoints[1]}) {
     height: 75px;
     width: 52px;
   }

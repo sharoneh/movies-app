@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../common/variables'
 
 export const Container = styled.div`
   overflow: auto;
@@ -7,7 +8,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 577px;
 
-  @media screen and (max-width: 576px) {
+  @media screen and (max-width: ${breakpoints[1]}) {
     margin-top: 20px;
   }
 `

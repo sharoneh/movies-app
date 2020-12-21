@@ -27,25 +27,42 @@ export const searchRequest = searchStr => ({
 
 export const movieRequest = () => ({ type: MOVIE_REQUEST })
 
+export const request = (dispatch, url) => {
+  return fetch(url)
+    .then(response => response.json())
+    .then(response => {
+      const {
+        Response,
+        Error: err,
+        ...data
+      } = response
+
+      if (err || Response === 'False') {
+        dispatch(setError(err.message))
+        dispatch(setLoading(false))
+        return
+      }
+
+      return new Promise(resolve => resolve(data))
+    })
+    .catch(err => {
+      dispatch(setError(err.message))
+      dispatch(setLoading(false))
+    })
+}
+
 export const searchMovies = (str, page, year) => {
+  if (!str) return
+
   return dispatch => {
     dispatch(searchRequest(str))
 
-    fetch(`${baseUrl}&s=${str}&page=${page}${year ? `&y=${year}` : ''}`)
-      .then(response => response.json())
+    request(dispatch, `${baseUrl}&s=${str}&page=${page}${year ? `&y=${year}` : ''}`)
       .then(response => {
         const {
-          Response,
-          Error: err,
           Search: movies,
           totalResults
         } = response
-
-        if (err || Response === 'False') {
-          dispatch(setError(err))
-          dispatch(setLoading(false))
-          return
-        }
 
         const totalPages = Math.ceil(totalResults / 10)
 
@@ -54,10 +71,6 @@ export const searchMovies = (str, page, year) => {
           payload: { movies, totalPages, page }
         })
       })
-      .catch(err => {
-        dispatch(setError(err))
-        dispatch(setLoading(false))
-      })
   }
 }
 
@@ -65,31 +78,12 @@ export const searchMovieById = id => {
   return dispatch => {
     dispatch(movieRequest())
 
-    fetch(`${baseUrl}&i=${id}&plot=full`)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response)
-
-        const {
-          Response,
-          Error: err,
-          ...movie
-        } = response
-
-        if (err || Response === 'False') {
-          dispatch(setError(err))
-          dispatch(setLoading(false))
-          return
-        }
-
+    request(dispatch, `${baseUrl}&i=${id}&plot=full`)
+      .then(movie => {
         dispatch({
           type: SET_MOVIE,
           payload: movie
         })
-      })
-      .catch(err => {
-        dispatch(setError(err))
-        dispatch(setLoading(false))
       })
   }
 }
