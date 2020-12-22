@@ -1,15 +1,12 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import { Container, Header, MoviePageTitle, SearchLink } from './styled'
 
 import { searchMovieById } from '../../redux/MoviesReducer'
 import ErrorPage from './ErrorPage'
-
-const Item = ({ label, value }) => value && value !== 'N/A' ? (
-  <li><b>{label}: </b>{value}</li>
-) : null
+import Section from './Section'
 
 const MoviePage = ({ movie, searchMovieById }) => {
   const { movieId } = useParams()
@@ -27,29 +24,47 @@ const MoviePage = ({ movie, searchMovieById }) => {
     Poster,
     Type,
     Plot,
-
-    Released,
-    Genre,
-    Runtime,
-    Rated,
-    totalSeasons,
-    Country,
-    Language,
-
-    Awards,
-    imdbRating,
-    imdbVotes,
-    Metascore,
-
-    Director,
-    Writer,
-    Actors,
-    Production,
-
-    Website,
-    DVD,
-    BoxOffice,
   } = movie
+
+  const sections = [
+    {
+      title: 'General',
+      items: [
+        { label: 'Release date', value: movie.Released },
+        { label: 'Genre', value: movie.Genre },
+        { label: 'Runtime', value: movie.Runtime },
+        { label: 'Rated', value: movie.Rated },
+        { label: 'Total seasons', value: movie.totalSeasons },
+        { label: 'Country', value: movie.Country },
+        { label: 'Language', value: movie.Language },
+      ]
+    },
+    {
+      title: 'Featuring',
+      items: [
+        { label: 'Director', value: movie.Director },
+        { label: 'Writer', value: movie.Writer },
+        { label: 'Actors', value: movie.Actors },
+        { label: 'Production', value: movie.Production },
+      ]
+    },
+    {
+      title: 'Repercussion',
+      items: [
+        { label: 'Awards', value: movie.Awards },
+        { label: 'IMDb Rating', value: `${movie.imdbRating} (${movie.imdbVotes} votes)` },
+        { label: 'Metascore', value: movie.Metascore },
+      ]
+    },
+    {
+      title: 'Other',
+      items: [
+        { label: 'Website', value: movie.Website },
+        { label: 'DVD', value: movie.DVD },
+        { label: 'Box Office', value: movie.BoxOffice },
+      ]
+    }
+  ]
 
   return (
     <>
@@ -83,50 +98,9 @@ const MoviePage = ({ movie, searchMovieById }) => {
               <p className="plot">{Plot}</p>
             )}
 
-            <section>
-              <h3>General</h3>
-
-              <ul>
-                <Item label="Release date" value={Released} />
-                <Item label="Genre" value={Genre} />
-                <Item label="Runtime" value={Runtime} />
-                <Item label="Rated" value={Rated} />
-                <Item label="Total seasons" value={totalSeasons} />
-                <Item label="Country" value={Country} />
-                <Item label="Language" value={Language} />
-              </ul>
-            </section>
-
-            <section>
-              <h3>Featuring</h3>
-
-              <ul>
-                <Item label="Director" value={Director} />
-                <Item label="Writer" value={Writer} />
-                <Item label="Actors" value={Actors} />
-                <Item label="Production" value={Production} />
-              </ul>
-            </section>
-
-            <section>
-              <h3>Repercussion</h3>
-
-              <ul>
-                <Item label="Awards" value={Awards} />
-                <Item label="IMDb Rating" value={`${imdbRating} (${imdbVotes} votes)`} />
-                <Item label="Metascore" value={Metascore} />
-              </ul>
-            </section>
-
-            <section>
-              <h3>Other</h3>
-
-              <ul>
-                <Item label="Website" value={Website} />
-                <Item label="DVD" value={DVD} />
-                <Item label="Box Office" value={BoxOffice} />
-              </ul>
-            </section>
+            {sections.map(section => (
+              <Section key={`section#${section.title}`} {...section} />
+            ))}
           </div>
         </div>
       </Container>
