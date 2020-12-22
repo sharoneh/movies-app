@@ -12,3 +12,10 @@ export const Container = styled.div`
     margin-top: 20px;
   }
 `
+
+export const LoadingContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+`

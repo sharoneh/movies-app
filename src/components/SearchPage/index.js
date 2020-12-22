@@ -4,7 +4,6 @@ import { Container } from './styled'
 
 import SearchForm from './SearchForm'
 import MovieList from './MovieList'
-import Pagination from './Pagination'
 
 const SearchPage = ({ movies, loading, error }) => (
   <Container>
@@ -12,10 +11,6 @@ const SearchPage = ({ movies, loading, error }) => (
       <SearchForm />
 
       <MovieList />
-
-      {movies && (
-        <Pagination />
-      )}
     </div>
   </Container>
 )

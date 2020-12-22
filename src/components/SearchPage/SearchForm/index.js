@@ -12,7 +12,7 @@ import Button from '../../common/Button';
 
 import { searchMovies } from '../../../redux/MoviesReducer';
 
-const SearchForm = ({ page, loading, searchMovies }) => {
+const SearchForm = ({ loading, searchMovies }) => {
   const [str, setStr] = useState('')
   const [year, setYear] = useState('')
 
@@ -27,7 +27,7 @@ const SearchForm = ({ page, loading, searchMovies }) => {
 
       <Form onSubmit={e => {
         e.preventDefault()
-        searchMovies(str, page, year)
+        searchMovies(str, year)
       }}>
 
         <Input
@@ -63,8 +63,8 @@ const SearchForm = ({ page, loading, searchMovies }) => {
 }
 
 const mapStateToProps = state => {
-  const { page, loading } = state
-  return { page, loading }
+  const { loading } = state
+  return { loading }
 }
 
 export default connect(mapStateToProps, { searchMovies })(SearchForm)

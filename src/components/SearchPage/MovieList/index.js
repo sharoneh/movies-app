@@ -1,23 +1,44 @@
 import { connect } from 'react-redux'
-import { Container } from './styled';
-import Movie from './Movie';
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { useLoading, TailSpin } from '@agney/react-loading'
 
-const MovieList = ({ movies }) => {
+import { Container, LoadingContainer } from './styled';
+
+import Movie from './Movie';
+import { nextPage } from '../../../redux/MoviesReducer';
+
+const MovieList = ({ movies, totalPages, page, nextPage }) => {
+  const { containerProps, indicatorEl } = useLoading({
+    loading: true,
+    indicator: <TailSpin width={30} />,
+  })
+
   return movies && (
-    <Container>
-      {movies.map((movie, index) => (
-        <Movie
-          {...movie}
-          key={`movie#${index}`}
-        />
-      ))}
+    <Container {...containerProps}>
+      <InfiniteScroll
+        dataLength={movies.length}
+        next={nextPage}
+        hasMore={totalPages > page}
+        loader={
+          <LoadingContainer>
+            {indicatorEl}
+          </LoadingContainer>
+        }
+      >
+        {movies.map((movie, index) => (
+          <Movie
+            {...movie}
+            key={`movie#${index}`}
+          />
+        ))}
+      </InfiniteScroll>
     </Container>
   )
 }
 
 const mapStateToProps = state => {
-  const { movies } = state
-  return { movies }
+  const { movies, totalPages, page } = state
+  return { movies, totalPages, page }
 }
 
-export default connect(mapStateToProps)(MovieList)
+export default connect(mapStateToProps, { nextPage })(MovieList)
