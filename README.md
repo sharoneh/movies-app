@@ -3,6 +3,7 @@
 Web application that allows the user to search for movies, series and episodes by its title and year using the [OMDb API](http://www.omdbapi.com).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Icons made by [Roundicons](https://www.flaticon.com/authors/roundicons) from [Flaticon](https://www.flaticon.com/).
 
 ## Installation
 
