@@ -28,27 +28,31 @@ export const searchRequest = searchStr => ({
 export const movieRequest = () => ({ type: MOVIE_REQUEST })
 
 export const request = (dispatch, url) => {
-  return fetch(url)
-    .then(response => response.json())
-    .then(response => {
-      const {
-        Response,
-        Error: err,
-        ...data
-      } = response
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        const {
+          Response,
+          Error: err,
+          ...data
+        } = response
 
-      if (err || Response === 'False') {
-        dispatch(setError(err.message))
+        if (err || Response === 'False') {
+          dispatch(setError(err))
+          dispatch(setLoading(false))
+          return
+        }
+
+        resolve(data)
+      })
+      .catch(err => {
+        dispatch(setError(err))
         dispatch(setLoading(false))
-        return
-      }
+        reject(err)
+      })
 
-      return new Promise(resolve => resolve(data))
-    })
-    .catch(err => {
-      dispatch(setError(err.message))
-      dispatch(setLoading(false))
-    })
+  })
 }
 
 export const searchMovies = (str, page, year) => {

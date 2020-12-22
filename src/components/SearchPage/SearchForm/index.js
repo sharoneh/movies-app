@@ -26,7 +26,7 @@ const SearchForm = ({ page, searchMovies }) => {
 
         <Input
           type="search"
-          placeholder="title"
+          placeholder="title*"
           aria-label="Title"
           className="title"
           value={str}
