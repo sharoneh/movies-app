@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { Container } from './styled'
 
@@ -7,11 +8,15 @@ import MovieList from './MovieList'
 
 const SearchPage = ({ movies, loading, error }) => (
   <Container>
-    <div className="search-page">
-      <SearchForm />
+    <motion.div
+      className="search-page"
+    >
+      <AnimatePresence>
+        <SearchForm key="searchForm" />
 
-      <MovieList />
-    </div>
+        <MovieList key="movieList" />
+      </AnimatePresence>
+    </motion.div>
   </Container>
 )
 

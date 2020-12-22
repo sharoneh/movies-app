@@ -10,7 +10,7 @@ const Movie = ({ Title, Poster, Type, Year, imdbID }) => {
       <MovieInfo>
         <p className="title">
           <strong>{Title}</strong> ({Year})
-        </p>
+          </p>
         <p>{Type}</p>
       </MovieInfo>
 

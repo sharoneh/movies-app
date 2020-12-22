@@ -14,7 +14,13 @@ const MovieList = ({ movies, totalPages, page, nextPage }) => {
   })
 
   return movies && (
-    <Container {...containerProps}>
+    <Container
+      {...containerProps}
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: .5 }}
+    >
       <InfiniteScroll
         dataLength={movies.length}
         next={nextPage}
