@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Title from '../common/Title'
 import { blue, lightGrey, orange, floralWhite, breakpoints } from '../common/variables'
 
 export const Header = styled.header`
@@ -126,5 +127,14 @@ export const Container = styled.div`
         padding: 0;
       }
     }
+  }
+`
+
+export const MoviePageTitle = styled(Title)`
+  margin: 0;
+  color: ${orange};
+
+  @media screen and (max-width: ${breakpoints[1]}) {
+    font-size: 1.2em;
   }
 `

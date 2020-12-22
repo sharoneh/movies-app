@@ -5,8 +5,8 @@ import {
   Container,
   Form,
   Input,
+  SearchPageTitle
 } from './styled'
-import { SearchPageTitle } from '../../common/Title';
 import Button from '../../common/Button';
 
 import { searchMovies } from '../../../redux/MoviesReducer';
