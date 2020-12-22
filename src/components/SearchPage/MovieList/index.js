@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import Movie from './Movie';
 import { Container } from './styled';
+import Movie from './Movie';
 
 const MovieList = ({ movies }) => {
   return movies && (

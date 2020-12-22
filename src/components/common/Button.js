@@ -12,6 +12,7 @@ const Button = styled.button`
   font-family: 'Zilla Slab', serif;
   cursor: pointer;
   transition: ease .3s;
+  min-width: 92px;
 
   &:hover,
   &:disabled {

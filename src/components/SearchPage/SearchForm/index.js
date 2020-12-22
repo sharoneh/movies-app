@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux'
+import { useLoading, TailSpin } from '@agney/react-loading'
 
 import {
   Container,
@@ -11,9 +12,14 @@ import Button from '../../common/Button';
 
 import { searchMovies } from '../../../redux/MoviesReducer';
 
-const SearchForm = ({ page, searchMovies }) => {
+const SearchForm = ({ page, loading, searchMovies }) => {
   const [str, setStr] = useState('')
   const [year, setYear] = useState('')
+
+  const { indicatorEl } = useLoading({
+    loading,
+    indicator: <TailSpin width={16} />
+  })
 
   return (
     <Container>
@@ -49,16 +55,16 @@ const SearchForm = ({ page, searchMovies }) => {
 
         <Button
           type="submit"
-          disabled={!str}
-        >Search</Button>
+          disabled={!str || loading}
+        >{loading ? indicatorEl : 'Search'}</Button>
       </Form>
     </Container>
   );
 }
 
 const mapStateToProps = state => {
-  const { page } = state
-  return { page }
+  const { page, loading } = state
+  return { page, loading }
 }
 
 export default connect(mapStateToProps, { searchMovies })(SearchForm)

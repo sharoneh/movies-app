@@ -3,7 +3,7 @@ import { breakpoints } from '../../common/variables'
 
 export const Container = styled.div`
   overflow: auto;
-  z-index: 1;
+  z-index: 0;
   margin-top: 10px;
   width: 100%;
   max-width: 577px;
