@@ -6,7 +6,7 @@ import {
 
 const Movie = ({ Title, Poster, Type, Year, imdbID }) => {
   return (
-    <StyledLink to={`/movie/${imdbID}`}>
+    <StyledLink to={`/movie/${imdbID}`} tabIndex={1}>
       <MovieInfo>
         <p className="title">
           <strong>{Title}</strong> ({Year})

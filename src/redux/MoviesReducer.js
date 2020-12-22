@@ -4,7 +4,7 @@ const baseUrl = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}
 const INITIAL_STATE = {
   movies: null,
   movie: null,
-  searchStr: null,
+  searchStr: '',
   year: null,
   page: 1,
   totalPages: null,
@@ -158,7 +158,6 @@ const MoviesReducer = (state = INITIAL_STATE, action) => {
         ...state,
         loading: true,
         error: null,
-        movies: null,
         movie: null
       }
     case SET_SEARCH_RESULTS:

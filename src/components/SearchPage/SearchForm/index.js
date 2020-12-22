@@ -12,8 +12,8 @@ import Button from '../../common/Button';
 
 import { searchMovies } from '../../../redux/MoviesReducer';
 
-const SearchForm = ({ loading, searchMovies }) => {
-  const [str, setStr] = useState('')
+const SearchForm = ({ loading, searchMovies, searchStr }) => {
+  const [str, setStr] = useState(searchStr)
   const [year, setYear] = useState('')
 
   const { indicatorEl } = useLoading({
@@ -63,8 +63,8 @@ const SearchForm = ({ loading, searchMovies }) => {
 }
 
 const mapStateToProps = state => {
-  const { loading } = state
-  return { loading }
+  const { loading, searchStr } = state
+  return { loading, searchStr }
 }
 
 export default connect(mapStateToProps, { searchMovies })(SearchForm)
