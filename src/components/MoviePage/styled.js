@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Title from '../common/Title'
 import { blue, lightGrey, orange, floralWhite, breakpoints } from '../common/variables'
@@ -5,12 +6,15 @@ import { blue, lightGrey, orange, floralWhite, breakpoints } from '../common/var
 export const Header = styled.header`
   background-color: ${floralWhite};
   box-shadow: 0 0 10px rgba(0, 0, 0, .6);
-  padding: 1em;
+  padding: 1em 20px 1em 50px;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 2;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   h3 {
     font-weight: normal;
@@ -22,7 +26,7 @@ export const Header = styled.header`
   }
 
   @media screen and (max-width: ${breakpoints[1]}) {
-    padding: .8em;
+    padding: .8em 10px .8em 35px;
 
     h3 {
       font-size: 1em;
@@ -136,5 +140,36 @@ export const MoviePageTitle = styled(Title)`
 
   @media screen and (max-width: ${breakpoints[1]}) {
     font-size: 1.2em;
+  }
+`
+
+export const SearchLink = styled(Link)`
+  position: absolute;
+  left: 20px;
+  display: flex;
+  outline-color: ${orange};
+
+  &:before {
+    content: '';
+    mask-image: url('../assets/left-arrow.svg');
+    background-color: ${orange};
+    display: block;
+    height: 20px;
+    width: 20px;
+    transition: ease .3s;
+  }
+
+  &:hover:before {
+    opacity: .6;
+    transition: ease .3s;
+  }
+
+  @media screen and (max-width: ${breakpoints[1]}) {
+    left: 10px;
+    
+    &:before {
+      height: 15px;
+      width: 15px;
+    }
   }
 `

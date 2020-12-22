@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
-import { Container, Header, MoviePageTitle } from './styled'
+import { Container, Header, MoviePageTitle, SearchLink } from './styled'
 
 import { searchMovieById } from '../../redux/MoviesReducer'
 import ErrorPage from './ErrorPage'
@@ -11,7 +11,7 @@ const Item = ({ label, value }) => value && value !== 'N/A' ? (
   <li><b>{label}: </b>{value}</li>
 ) : null
 
-const MoviePage = ({ loading, error, movie, searchMovieById }) => {
+const MoviePage = ({ movie, searchMovieById }) => {
   const { movieId } = useParams()
 
   // eslint-disable-next-line
@@ -54,8 +54,17 @@ const MoviePage = ({ loading, error, movie, searchMovieById }) => {
   return (
     <>
       <Header>
-        <MoviePageTitle>{Title}</MoviePageTitle>
-        <h3>{Type} ({Year})</h3>
+        <SearchLink
+          to="/"
+          aria-label="Back to search page"
+        >
+
+        </SearchLink>
+
+        <div className="content">
+          <MoviePageTitle>{Title}</MoviePageTitle>
+          <h3>{Type} ({Year})</h3>
+        </div>
       </Header>
 
       <Container>
@@ -126,8 +135,8 @@ const MoviePage = ({ loading, error, movie, searchMovieById }) => {
 }
 
 const mapStateToProps = state => {
-  const { loading, error, movie } = state
-  return { loading, error, movie }
+  const { movie } = state
+  return { movie }
 }
 
 export default connect(mapStateToProps, { searchMovieById })(MoviePage)

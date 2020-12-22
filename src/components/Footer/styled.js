@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { lightGrey, breakpoints } from '../common/variables'
 
 export const StyledFooter = styled.footer`
-  position: fixed;
+  position: sticky;
   bottom: 0;
   padding: 10px 20px;
   background-color: #101018;
@@ -23,7 +23,7 @@ export const StyledFooter = styled.footer`
   }
 
   @media screen and (max-width: ${breakpoints[1]}) {
-    p, a {
+    p {
       font-size: .8em;
     }
   }
